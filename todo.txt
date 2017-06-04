@@ -1,0 +1,26 @@
+  (A) Corrigir provas de IF968   +IF968
+23052017  (A) Ler artigo IST.   +Serviço
+  (B) Terminar a especificação do projeto de IF968.   +IF968
+  (B) Publicar a especificação do projeto de IF968 terminada.   +IF968
+  (B) Revisar artigo IST   +Service
+  (B) Revisar artigos SBES   +Service
+  (B) Revisar artigos SBES Education   +Service
+  (B) Revisar artigos SBES Insightful Ideas   +Service
+  (B) Revisar artigos SBLP   +Service
+  (D) Read "Optimizing energy consumption of GUIs in android apps: A multi-objective approach."   
+ 1427 (E) superteste   +teste
+04062017 1558 (a) finalizar projeto p1  @IF968 
+   ﻿DDMMAAAA HHMM (PRI) DESC  @CTX +PROJ
+   Comer menos açúcar   
+23052017 1030  Reunião com Huguinho, Luizinho e Zezinho.  @Skype +Pesquisa
+ 2330  Dormir cedo  @Casa 
+ 1122  11223333 (X) Teste1  @teste +teste
+   11223333 11223333 (X) Errado1  @teste +teste
+ 1122  1122333344 (X) Errado2  @teste +teste
+ 1122  11gg3333 Errado3  @teste +teste
+   11223333 11ff Errado4  @teste +teste
+ 1122  111223333 (3) Errado5  @teste +teste
+ 1122  111223333 (X) Errado6  @@teste +teste
+ 1122  111223333 (X) Errado7  @teste ++teste
+11122333 1427  (X) Errado8 superteste  @teste +teste
+03062017 1427  superteste   +teste
