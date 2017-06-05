@@ -228,17 +228,15 @@ def organizar(linhas):
 def listar():
   fp = open(TODO_FILE, 'r')
   lista = organizar(fp.readlines())
+  ordenarPorDataHora(lista)
   ordenarPorPrioridade(lista)
   fp.close
-  i = 0
-  while i < len(lista):
-    item = str(i)+'.'+formatoPrint(lista[i])
-    printCores(item, esquemaCor(lista[i]))
-    i = i+1
+ 
   return lista
 
 def formatoPrint(item):
   texto = str(item[1][0]+' '+item[1][1]+' '+item[1][2]+' '+item[0]+' '+item[1][3]+' '+item[1][4])
+  texto = texto.strip()
   return texto
 
 def esquemaCor(item):
@@ -341,7 +339,7 @@ def valorPrioridade(item):
 def fazer(num):
 
   todo = listar()
-  d = open(ARCHIVE_FILE, 'a')
+  d = open(ARCHIVE_FILE, 'a+')
   d.write(formatoPrint(todo[num])+'\n')
   d.close
   todo.pop(num)
@@ -397,9 +395,14 @@ def processarComandos(comandos) :
     comandos.pop(0) # remove 'adicionar'
     itemParaAdicionar = organizar([' '.join(comandos)])[0]
     # itemParaAdicionar = (descricao, prioridade, (data, hora, contexto, projeto))
-    adicionar(itemParaAdicionar[0], itemParaAdicionar[2]) # novos itens não têm prioridade
+    adicionar(itemParaAdicionar[0], itemParaAdicionar[1]) # novos itens não têm prioridade
   elif comandos[1] == LISTAR:
-    listar()
+    lista = listar()
+    i = 0
+    while i < len(lista):
+      item = str(i)+'.'+formatoPrint(lista[i])
+      printCores(item, esquemaCor(lista[i]))
+      i = i+1
 
   elif comandos[1] == REMOVER:
     comandos.pop(0) # remove 'agenda.py'
