@@ -191,30 +191,28 @@ def organizar(linhas):
     # para saber se são contexto e/ou projeto. Quando isso terminar, o que sobrar
     # corresponde à descrição. É só transformar a lista de tokens em um string e
     # construir a tupla com as informações disponíveis. 
-
-    for x in tokens:
-      if dataValida(x) == True:
-        data = x
-       # tokens.remove(x)
-      elif horaValida(x) == True:
-        hora = x
-       # tokens.remove(x)
-      elif prioridadeValida(x) == True:
-        pri = x
-       # tokens.remove(x)
-      elif contextoValido(x) == True:
-        contexto = x
-        #tokens.remove(x)
-      elif projetoValido(x) == True:
-        projeto = x
-        #tokens.remove(x)
-      else:
-        desc = desc + str(x) + ' '
+    i =0
+    while i < len(tokens):
+      if i == 0 and dataValida(tokens[i]) == True and desc == '':
+        data = tokens.pop(i)
+      elif i == 0 and horaValida(tokens[i]) == True and desc == '':
+        hora = tokens.pop(i)
+      elif i == 0 and prioridadeValida(tokens[i]) == True and desc == '':
+        pri = tokens.pop(i)
+      else:             
+            if contextoValido(tokens[i]) == True:
+              contexto = tokens.pop(i)
+            
+            elif projetoValido(tokens[i]) == True:
+              projeto = tokens.pop(i)
+        
+            else:
+              desc = desc + str(tokens.pop(i)) + ' '
 
     if desc != '':
-      itens.append((desc, (data, hora, pri, contexto, projeto)))
-
+          itens.append((desc, (data, hora, pri, contexto, projeto)))
   return itens
+          
 
 
 # Datas e horas são armazenadas nos formatos DDMMAAAA e HHMM, mas são exibidas
@@ -228,10 +226,13 @@ def organizar(linhas):
 def listar():
   fp = open(TODO_FILE, 'r')
   lista = organizar(fp.readlines())
-  ordenarPorDataHora(lista)
   ordenarPorPrioridade(lista)
   fp.close
- 
+  i = 0
+  while i < len(lista):
+    item = str(i)+'.'+formatoPrint(lista[i])
+    printCores(item, esquemaCor(lista[i]))
+    i = i+1
   return lista
 
 def formatoPrint(item):
@@ -339,7 +340,7 @@ def valorPrioridade(item):
 def fazer(num):
 
   todo = listar()
-  d = open(ARCHIVE_FILE, 'a+')
+  d = open(ARCHIVE_FILE, 'a')
   d.write(formatoPrint(todo[num])+'\n')
   d.close
   todo.pop(num)
@@ -397,12 +398,7 @@ def processarComandos(comandos) :
     # itemParaAdicionar = (descricao, prioridade, (data, hora, contexto, projeto))
     adicionar(itemParaAdicionar[0], itemParaAdicionar[1]) # novos itens não têm prioridade
   elif comandos[1] == LISTAR:
-    lista = listar()
-    i = 0
-    while i < len(lista):
-      item = str(i)+'.'+formatoPrint(lista[i])
-      printCores(item, esquemaCor(lista[i]))
-      i = i+1
+    listar()
 
   elif comandos[1] == REMOVER:
     comandos.pop(0) # remove 'agenda.py'
