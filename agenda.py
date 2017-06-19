@@ -367,7 +367,7 @@ def remover(num):
 def priorizar(num, prioridade):
   todo = listar()
   prioridade = prioridade.upper()
-  oldItem = todo.pop(num)
+  oldItem = todo.pop(int(num))
   desc = oldItem[0]
   data = oldItem[1][0]
   hora = oldItem[1][1]
@@ -419,7 +419,7 @@ def processarComandos(comandos) :
     comandos.pop(0) # remove 'agenda.py'
     comandos.pop(0) # remove 'priorizar'
     
-    lista = comandos.split()
+    lista = comandos
     priorizar(lista[0], lista[1])
     
 
